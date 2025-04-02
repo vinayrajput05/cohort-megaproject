@@ -1,0 +1,65 @@
+entity-relationship-diagram
+
+users [icon: user, color: blue] {
+  id string pk
+  avatar string
+  username string
+  email string
+  fullname string
+  password string
+  isEmailVerified boolean
+  refreshToken  string
+  forgotPasswordToken string
+  forgotPasswordExpiry Datetime
+  emailVerificationToken string
+  emailVerificatioonExpiry Datetime
+}
+
+projects [icon: user-check, color: blue] {
+    id string
+    name string
+    description string
+    createdBy string fk
+}
+
+projectNotes [icon: twitter] {
+  id string
+  project string
+  content string
+  createdBy string fk
+}
+
+tasks [icon: copy] {
+  id string
+  title string
+  description string
+  project string fk
+  assignedTo string fk
+  assignedBy string fk
+  status enum
+  attachments string[]
+}
+
+projectmember [icon: users, color: green] {
+  user string
+  project string
+  role enum
+}
+
+subtask [icon: copy, color: green] {
+  task string fk
+  createdBy string fk
+  isCompleted boolean
+  content string
+}
+
+projects.createdBy > users.id
+projectmember.user <> users.id
+projectmember.project > projects.id
+tasks.project > projects.id
+tasks.assignedTo > users.id
+tasks.assignedBy > users.id
+subtask.task > tasks.id
+subtask.createdBy > users.id
+projectNotes.project > projects.id
+projectNotes.createdBy > users.id
