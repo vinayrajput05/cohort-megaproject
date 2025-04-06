@@ -1,6 +1,5 @@
-
 export const healthcheck = (req, res) => {
-    res.status(200).json({
-        message: "Server is up and running"
-    })
-}
+  res.status(200).json({
+    message: "Server is up and running",
+  });
+};
